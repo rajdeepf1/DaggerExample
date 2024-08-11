@@ -1,10 +1,11 @@
 package com.example.daggerexample
 
 import javax.inject.Inject
-
+import javax.inject.Named
+// @Named Qualifier
 class UserRegistrationService @Inject constructor(
     private val userRepositoryService: UserRepositoryService,
-    private val notificationService: NotificationService
+    @Named("message") private val notificationService: NotificationService
 ){
 
     fun registerUser(email: String, password: String) {
