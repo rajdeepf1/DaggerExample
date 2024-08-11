@@ -14,9 +14,9 @@ class EmailService @Inject constructor() : NotificationService{
     }
 }
 
-class MessageService @Inject constructor() : NotificationService{
+class MessageService @Inject constructor(private val count : Int) : NotificationService{
     override fun send(to: String, from: String, body: String?) {
-        Log.d("MessageService", "Message Sent")
+        Log.d("MessageService", "Message Sent ${count}")
     }
 
 }

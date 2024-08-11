@@ -22,7 +22,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val component = DaggerUserRegistrationComponent.builder().build()
+        val component = DaggerUserRegistrationComponent
+            .builder()
+            .notificationServiceModule(NotificationServiceModule(3))
+            .build()
 
 //        val userRegistrationService = component.getUserRegistrationService()
 //        val emailService = component.getEmailService()
