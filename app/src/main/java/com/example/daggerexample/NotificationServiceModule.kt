@@ -9,7 +9,8 @@ import javax.inject.Singleton
 class NotificationServiceModule {
 
     //@Named("message") //Qualifier
-    @Singleton
+    //@Singleton
+    @ApplicationScope
     @MessageQualifier //custom qualifier made by me
     @Provides
     fun getMessageService(count : Int) : NotificationService{
