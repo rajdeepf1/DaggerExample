@@ -2,12 +2,14 @@ package com.example.daggerexample
 
 import android.util.Log
 import javax.inject.Inject
+import javax.inject.Singleton
 
 
 interface UserRepositoryService{
     fun saveUser(email: String, password: String)
 }
 
+@Singleton
 class SQLRepository @Inject constructor() : UserRepositoryService {
     override fun saveUser(email: String, password: String) {
         Log.d("SQLRepository", "User Saved in SQLRepository")

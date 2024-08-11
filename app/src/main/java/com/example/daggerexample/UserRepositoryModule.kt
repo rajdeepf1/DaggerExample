@@ -3,6 +3,7 @@ package com.example.daggerexample
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 //@Module
 //class UserRepositoryModule {
@@ -24,5 +25,6 @@ import dagger.Provides
 @Module
 abstract class UserRepositoryModule {
     @Binds
+    @Singleton
     abstract fun getSQLRepository(sqlRepository: SQLRepository) : UserRepositoryService
 }

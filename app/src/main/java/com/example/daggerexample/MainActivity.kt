@@ -19,6 +19,12 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var userRegistrationService :UserRegistrationService
 
+    @Inject
+    lateinit var emailService: EmailService
+
+    @Inject
+    lateinit var emailService1: EmailService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
