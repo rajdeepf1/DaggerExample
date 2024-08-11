@@ -23,9 +23,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val component = DaggerUserRegistrationComponent
-            .builder()
-            .notificationServiceModule(NotificationServiceModule(3))
-            .build()
+            //.builder()
+//            .notificationServiceModule(NotificationServiceModule(3))
+            //.build()
+            .factory().create(3)  // Passing value through Factory
 
 //        val userRegistrationService = component.getUserRegistrationService()
 //        val emailService = component.getEmailService()

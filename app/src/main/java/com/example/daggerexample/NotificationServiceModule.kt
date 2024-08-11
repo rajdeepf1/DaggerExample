@@ -5,12 +5,12 @@ import dagger.Provides
 import javax.inject.Named
 
 @Module
-class NotificationServiceModule(private val count : Int) {
+class NotificationServiceModule {
 
     //@Named("message") //Qualifier
     @MessageQualifier //custom qualifier made by me
     @Provides
-    fun getMessageService() : NotificationService{
+    fun getMessageService(count : Int) : NotificationService{
         return  MessageService(count)
     }
     @Named("email") //Qualifierx
