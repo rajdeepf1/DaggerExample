@@ -3,8 +3,20 @@ package com.example.daggerexample
 import android.util.Log
 import javax.inject.Inject
 
-class UserRepository @Inject constructor() {
-    fun saveUser(email: String, password: String) {
-        Log.d("UserRegisterService", "User Saved in DB")
+
+interface UserRepositoryService{
+    fun saveUser(email: String, password: String)
+}
+
+class SQLRepository @Inject constructor() : UserRepositoryService {
+    override fun saveUser(email: String, password: String) {
+        Log.d("SQLRepository", "User Saved in SQLRepository")
     }
+}
+
+class FirebaseRepository @Inject constructor() : UserRepositoryService {
+    override fun saveUser(email: String, password: String) {
+        Log.d("FirebaseRepository", "User Saved in FirebaseRepository")
+    }
+
 }
