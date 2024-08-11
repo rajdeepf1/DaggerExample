@@ -1,6 +1,8 @@
 package com.example.daggerexample
 
+import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -19,27 +21,34 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var userRegistrationService :UserRegistrationService
 
-    @Inject
+    //@Inject
     lateinit var emailService: EmailService
 
-    @Inject
+    //@Inject
     lateinit var emailService1: EmailService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val component = DaggerUserRegistrationComponent
-            //.builder()
-//            .notificationServiceModule(NotificationServiceModule(3))
-            //.build()
-            .factory().create(3)  // Passing value through Factory
+//        val component = DaggerUserRegistrationComponent
+//            //.builder()
+////            .notificationServiceModule(NotificationServiceModule(3))
+//            //.build()
+//            .factory().create(3)  // Passing value through Factory
 
 //        val userRegistrationService = component.getUserRegistrationService()
 //        val emailService = component.getEmailService()
         // or
 
-        component.inject(this)
+        // Now we are creating this object from application scope, so these objects will same
+        val component = (application as UserApplication).userRegistrationComponent
+        emailService = component.getEmailService()
+        emailService1 = component.getEmailService()
 
+        Log.d("emailService", "onCreate: ${emailService}")
+        Log.d("emailService1", "onCreate: ${emailService1}")
+
+        component.inject(this)
         userRegistrationService.registerUser("rajdeepf1@gmail.com","123")
 
         enableEdgeToEdge()

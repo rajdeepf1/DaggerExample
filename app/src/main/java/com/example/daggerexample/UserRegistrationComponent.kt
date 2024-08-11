@@ -9,9 +9,12 @@ import javax.inject.Singleton
 interface UserRegistrationComponent {
 //    fun getUserRegistrationService() : UserRegistrationService
 //    fun getEmailService() : EmailService
+
     //or
 
     fun inject(mainActivity: MainActivity)
+
+    fun getEmailService() : EmailService
 
     @Component.Factory
     interface Factory{
