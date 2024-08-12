@@ -13,49 +13,28 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
 import com.example.daggerexample.ui.theme.DaggerExampleTheme
+import com.example.daggerexample.viewmodels.MainViewModel
+import com.example.daggerexample.viewmodels.MainViewModelFactory
 import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
 
+    lateinit var mainViewModel: MainViewModel
+
     @Inject
-    lateinit var userRegistrationService :UserRegistrationService
-
-    //@Inject
-    lateinit var emailService: EmailService
-
-    //@Inject
-    lateinit var emailService1: EmailService
+    lateinit var mainViewModelFactory: MainViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        val component = DaggerUserRegistrationComponent
-//            //.builder()
-////            .notificationServiceModule(NotificationServiceModule(3))
-//            //.build()
-//            .factory().create(3)  // Passing value through Factory
+        (application as FakerApplication).applicationComponent.inject(this)
+        mainViewModel = ViewModelProvider(this, mainViewModelFactory).get(MainViewModel::class.java)
 
-//        val userRegistrationService = component.getUserRegistrationService()
-//        val emailService = component.getEmailService()
-        // or
-
-        // Now we are creating this object from application scope, so these objects will same
-        //val component = (application as UserApplication).userRegistrationComponent
-
-        val appComponent = (application as UserApplication).appComponent
-        //val userRegistrationComponent = DaggerUserRegistrationComponent.factory().create(3,appComponent)
-        val userRegistrationComponent = appComponent.getUserRegistrationComponentFactory().create(3)
-        emailService = userRegistrationComponent.getEmailService()
-        emailService1 = userRegistrationComponent.getEmailService()
-
-        Log.d("emailService", "onCreate: ${emailService}")
-        Log.d("emailService1", "onCreate: ${emailService1}")
-
-        //component.inject(this)
-        userRegistrationComponent.inject(this)
-        userRegistrationService.registerUser("rajdeepf1@gmail.com","123")
-
+        mainViewModel.productsLiveData.observe(this,{
+            Log.d("MainActivity", "onCreate: ${it}")
+        })
         enableEdgeToEdge()
         setContent {
             DaggerExampleTheme {

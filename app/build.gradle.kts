@@ -67,6 +67,22 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("com.google.dagger:dagger:2.52")
-    kapt("com.google.dagger:dagger-compiler:2.52")
+
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
+
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+
+
+    implementation (libs.androidx.room.runtime)
+    implementation (libs.androidx.room.ktx)
+    kapt (libs.androidx.room.compiler)
+
+    implementation (libs.kotlinx.coroutines.core)
+    implementation (libs.kotlinx.coroutines.android)
+
+
 }
