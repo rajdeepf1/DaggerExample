@@ -44,7 +44,8 @@ class MainActivity : ComponentActivity() {
         //val component = (application as UserApplication).userRegistrationComponent
 
         val appComponent = (application as UserApplication).appComponent
-        val userRegistrationComponent = DaggerUserRegistrationComponent.factory().create(3,appComponent)
+        //val userRegistrationComponent = DaggerUserRegistrationComponent.factory().create(3,appComponent)
+        val userRegistrationComponent = appComponent.getUserRegistrationComponentFactory().create(3)
         emailService = userRegistrationComponent.getEmailService()
         emailService1 = userRegistrationComponent.getEmailService()
 
