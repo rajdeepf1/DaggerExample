@@ -41,14 +41,18 @@ class MainActivity : ComponentActivity() {
         // or
 
         // Now we are creating this object from application scope, so these objects will same
-        val component = (application as UserApplication).userRegistrationComponent
-        emailService = component.getEmailService()
-        emailService1 = component.getEmailService()
+        //val component = (application as UserApplication).userRegistrationComponent
+
+        val appComponent = (application as UserApplication).appComponent
+        val userRegistrationComponent = DaggerUserRegistrationComponent.factory().create(3,appComponent)
+        emailService = userRegistrationComponent.getEmailService()
+        emailService1 = userRegistrationComponent.getEmailService()
 
         Log.d("emailService", "onCreate: ${emailService}")
         Log.d("emailService1", "onCreate: ${emailService1}")
 
-        component.inject(this)
+        //component.inject(this)
+        userRegistrationComponent.inject(this)
         userRegistrationService.registerUser("rajdeepf1@gmail.com","123")
 
         enableEdgeToEdge()

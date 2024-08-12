@@ -7,8 +7,9 @@ import dagger.Component
 import javax.inject.Singleton
 
 //@Singleton
-@ApplicationScope
-@Component(modules = [UserRepositoryModule::class, NotificationServiceModule::class,AnalyticsServiceModule::class])
+//@ApplicationScope
+@ActivityScope
+@Component(dependencies = [AppComponent::class], modules = [UserRepositoryModule::class, NotificationServiceModule::class])
 interface UserRegistrationComponent {
 //    fun getUserRegistrationService() : UserRegistrationService
 //    fun getEmailService() : EmailService
@@ -21,7 +22,7 @@ interface UserRegistrationComponent {
 
     @Component.Factory
     interface Factory{
-        fun create(@BindsInstance count : Int):UserRegistrationComponent
+        fun create(@BindsInstance count : Int,appComponent: AppComponent):UserRegistrationComponent
     }
 
 }

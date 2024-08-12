@@ -10,7 +10,8 @@ class NotificationServiceModule {
 
     //@Named("message") //Qualifier
     //@Singleton
-    @ApplicationScope
+    //@ApplicationScope
+    @ActivityScope
     @MessageQualifier //custom qualifier made by me
     @Provides
     fun getMessageService(count : Int) : NotificationService{
