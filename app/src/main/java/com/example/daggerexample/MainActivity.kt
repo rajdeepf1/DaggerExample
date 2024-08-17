@@ -16,21 +16,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import com.example.daggerexample.ui.theme.DaggerExampleTheme
 import com.example.daggerexample.viewmodels.MainViewModel
-import com.example.daggerexample.viewmodels.MainViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     lateinit var mainViewModel: MainViewModel
 
-    @Inject
-    lateinit var mainViewModelFactory: MainViewModelFactory
+//    @Inject
+//    lateinit var mainViewModelFactory: MainViewModelFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (application as FakerApplication).applicationComponent.inject(this)
-        mainViewModel = ViewModelProvider(this, mainViewModelFactory).get(MainViewModel::class.java)
+        //(application as FakerApplication).applicationComponent.inject(this)
+        //mainViewModel = ViewModelProvider(this, mainViewModelFactory).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         mainViewModel.productsLiveData.observe(this,{
             Log.d("MainActivity", "onCreate: ${it}")
